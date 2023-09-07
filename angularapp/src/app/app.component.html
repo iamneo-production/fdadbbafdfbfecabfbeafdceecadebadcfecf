@@ -1,0 +1,49 @@
+<div class="form">
+  <form [formGroup]="regForm" (ngSubmit)="submitButton()">
+    <p style="text-align: center;margin-left: 25px;"> Registration Form</p>
+    <div class="form-group col-md-11" style="margin-left: 15px;">
+      <label>First Name</label>
+      <input formControlName="inputFirstname" id="inputFirstname" type="text" class="form-control" >
+    </div>
+    <div id="errorFirstName" *ngIf="regForm.controls['inputFirstname'].errors?.required || regForm.controls['inputFirstname'].errors?.pattern || regForm.controls['inputFirstname'].errors?.minlength || regForm.controls['inputFirstname'].errors?.maxlength">
+      Name is required / Entered a valid name
+    </div>
+    <div class="form-check"  *ngFor="let ind of gender; let i=index">
+        <label>
+          <input required type="checkbox" id="gender" [value]="ind.sex" (change)="onCheckChange($event)">
+          {{ind.sex}}
+        </label>
+    </div>    
+    <div id="errorGender" *ngIf="regForm.controls['gender'].errors?.required">
+      Gender is required. Please select the CheckBox
+    </div>
+    <div class="form-group col-md-11" style="margin-left: 15px">
+      <label>Country</label>
+      <select formControlName="country" id="country" class="form-control" (change)="selected($event)" >
+        <option *ngFor="let ind of country" [value]="ind.code" >{{ind.code}}</option>
+      </select>
+    </div>
+  <div id="errorCountry" *ngIf="regForm.controls['country'].errors?.required">
+      Country is required.
+    </div>
+    <div class="form-group col-md-11" style="margin-left: 15px">
+      <label>City</label>
+      <input required formControlName="city" id="city" class="form-control" >
+    </div>
+    <div id="errorCity" *ngIf="regForm.controls['city'].errors?.required">
+      City is required and should be valid input.
+    </div>
+    <div class="form-group col-md-11" style="margin-left: 15px">
+      <label>Age</label>
+      <input formControlName="inputAge" id="inputAge" class="form-control" >
+    </div>
+    <div id="errorAge" *ngIf="regForm.controls['inputAge'].errors?.required || regForm.controls['inputAge'].errors?.pattern">
+      Age is required and should be valid input.
+    </div>
+    <div class="form-group col-md-11" style="align-items: center;margin-left: 34%;">
+      <button class="btn btn-primary" style="right: 50px; margin-top: 10px;margin-bottom: 10px;" id="submit" color="primary" type="submit">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
